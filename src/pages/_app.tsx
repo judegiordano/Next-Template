@@ -2,7 +2,7 @@ import React from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
-import '../styles/globals.css';
+import "../styles/globals.css";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
