@@ -23,6 +23,9 @@
 			"@styles/*": [
 				"src/styles/*"
 			],
+			"@Elements/*": [
+				"src/Components/Elements/*"
+			],
 		}
 	},
 	"include": [

@@ -3,6 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 
 import "../styles/globals.css";
+import { AppLink } from "@Elements/AppLink";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
@@ -21,8 +22,11 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Elem
 				<Component {...pageProps} />
 			</div>
 			<footer className="items-center justify-center w-full h-full mt-10 text-center border-t-2 border-gray-200">
-				<div style={{ paddingTop: "10px" }}>
-					&#169; Copyright {new Date().getFullYear().toString()}
+				<div className="pt-2.5">
+					&#169; Copyright {new Date().getFullYear().toString()} all rites reserved
+				</div>
+				<div className="pt-2.5">
+					<AppLink href="/privacy-policy">Privacy Policy</AppLink> - <AppLink href="/terms-of-use">Terms of Use</AppLink>
 				</div>
 			</footer>
 		</>
