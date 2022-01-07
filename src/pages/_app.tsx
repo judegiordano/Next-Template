@@ -3,7 +3,7 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 
 import "../styles/globals.css";
-import { AppLink } from "@Elements/AppLink";
+import { AppLink } from "@Elements";
 import { Notifications } from "@Components/Notifications";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {

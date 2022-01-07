@@ -23,8 +23,11 @@
 			"@styles/*": [
 				"src/styles/*"
 			],
-			"@Elements/*": [
-				"src/Components/Elements/*"
+			"@Elements": [
+				"src/Components/Elements"
+			],
+			"@Icons": [
+				"src/Components/Icons"
 			],
 			"@Components/*": [
 				"src/Components/*"
@@ -38,7 +41,7 @@
 		"next-env.d.ts",
 		"**/*.ts",
 		"**/*.tsx"
-	],
+, "src/Components/Icons/index.xts"	],
 	"exclude": [
 		"node_modules"
 	]
