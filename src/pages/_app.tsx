@@ -4,6 +4,7 @@ import Head from "next/head";
 
 import "../styles/globals.css";
 import { AppLink } from "@Elements/AppLink";
+import { Notifications } from "@Components/Notifications";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
@@ -29,6 +30,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Elem
 					<AppLink href="/privacy-policy">Privacy Policy</AppLink> - <AppLink href="/terms-of-use">Terms of Use</AppLink>
 				</div>
 			</footer>
+			<Notifications />
 		</>
 	);
 };

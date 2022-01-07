@@ -26,6 +26,12 @@
 			"@Elements/*": [
 				"src/Components/Elements/*"
 			],
+			"@Components/*": [
+				"src/Components/*"
+			],
+			"@Store": [
+				"src/Store"
+			],
 		}
 	},
 	"include": [

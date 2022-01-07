@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-describe("Ensure Text Exsts", () => {
+describe("Ensure Text Exists", () => {
 	before(() => {
 		cy.visit("/");
 	});
