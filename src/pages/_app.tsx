@@ -26,7 +26,7 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Elem
 				</div>
 				<footer className="items-center justify-center w-full h-full mt-10 text-center border-t-2 border-gray-200">
 					<div className="pt-2.5">
-						&#169; Copyright {new Date().getFullYear().toString()} all rites reserved
+						&#169; Copyright {new Date().getFullYear().toString()} all rights reserved
 					</div>
 					<div className="pt-2.5">
 						<AppLink href="/privacy-policy">Privacy Policy</AppLink> - <AppLink href="/terms-of-use">Terms of Use</AppLink>

@@ -11,7 +11,7 @@ type UseApi<T> = {
 }
 
 const api = axios.create({
-	baseURL: "/api"
+	baseURL: "/api/example"
 });
 
 async function fetcher<T>(url?: string) {
