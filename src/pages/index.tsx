@@ -69,8 +69,32 @@ const CountDisplay: React.FC = (): JSX.Element => {
 	);
 };
 
+interface IUsersComponentProps {
+	users: Example[]
+}
+
+const UserComponent: React.FC<IUsersComponentProps> = ({
+	users
+}: IUsersComponentProps): JSX.Element => {
+	return (
+		<div className="max-w-[300px] m-auto py-3">
+			{
+				users.map(({
+					username,
+					email
+				}, i) => (
+					<div className="text-xs text-left" key={i}>
+						{i + 1}. <span className="font-semibold">{username}</span>: {email}
+					</div>
+				))
+			}
+		</div>
+	);
+};
+
 const Home: React.FC = (): JSX.Element => {
 	const { data, isLoading } = useApi<Example[]>("users");
+
 	return (
 		<div className="text-2xl text-center">
 			<h1>
@@ -79,20 +103,9 @@ const Home: React.FC = (): JSX.Element => {
 			<CountDisplay />
 			<CounterControls />
 			<Spinner visible={isLoading} />
-			<div className="max-w-[300px] m-auto py-3">
-				{
-					!isLoading && data && (
-						data.map(({
-							username,
-							email
-						}, i) => (
-							<div className="text-xs text-left" key={i}>
-								{i + 1}. <span className="font-semibold">{username}</span>: {email}
-							</div>
-						))
-					)
-				}
-			</div>
+			{
+				!isLoading && data && <UserComponent users={data} />
+			}
 		</div>
 	);
 };

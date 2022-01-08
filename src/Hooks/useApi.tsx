@@ -1,4 +1,8 @@
-import useSWR from "swr";
+import toast from "react-hot-toast";
+import axios from "axios";
+import useSWR, { useSWRConfig } from "swr";
+
+import { SwrGetItem, SwrSetItem } from "@Store";
 
 type UseApi<T> = {
 	data: T
@@ -6,19 +10,28 @@ type UseApi<T> = {
 	error: string
 }
 
-const base = "/api";
+const api = axios.create({
+	baseURL: "/api"
+});
 
-const fetcher = async (url?: string) => {
-	const res = await fetch(`${base}/${url}`, {
-		method: "GET"
-	});
-	return await res.json();
-};
+async function fetcher<T>(url?: string) {
+	const { data } = await api.get(url);
+	return data as T;
+}
 
-export function useApi<T>(url?: string): UseApi<T> {
-	const { data, error } = useSWR(url, fetcher, {
-		refreshInterval: 2000
+export function useApi<T>(key?: string): UseApi<T> {
+	const { mutate } = useSWRConfig();
+	const { data, error } = useSWR(key, () => fetcher<T>(key), {
+		refreshInterval: 5000,
+		onError: async (e, key) => {
+			toast.error(e.toString());
+			console.log(e);
+			const cache = SwrGetItem<T>(key);
+			cache && mutate(key, cache, false);
+		},
+		onSuccess: (data: T, key: string) => SwrSetItem<T>(key, data)
 	});
+
 	return {
 		data,
 		isLoading: !error && !data,
