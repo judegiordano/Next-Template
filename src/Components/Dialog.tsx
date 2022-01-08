@@ -23,6 +23,7 @@ export const Dialog: React.FC<IDialogProps> = ({
 }: IDialogProps): JSX.Element => {
 	return (
 		<_Dialog
+			keepMounted
 			open={open}
 			onClose={handleClose}
 			aria-labelledby="alert-dialog-title"

@@ -35,6 +35,9 @@
 			"@Store": [
 				"src/Store"
 			],
+			"@Hooks/*": [
+				"src/Hooks/*"
+			],
 		}
 	},
 	"include": [
