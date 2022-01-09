@@ -6,32 +6,8 @@ import { AppLink } from "@Elements";
 import { useCounterStore } from "@Store";
 import { Dialog } from "@Components/Dialog";
 import { Spinner } from "@Components/Spinner";
-import { useApi } from "@Hooks/useApi";
+import { useUser } from "@Hooks/useUser";
 import { AddIcon, DeleteIcon, RemoveIcon } from "@Icons";
-
-type Example = {
-	id: 1,
-	name: string
-	username: string
-	email: string
-	address: {
-		street: string
-		suite: string
-		city: string
-		zipcode: string
-		geo: {
-			lat: string
-			lng: string
-		}
-	},
-	phone: string
-	website: string
-	company: {
-		name: string
-		catchPhrase: string
-		bs: string
-	}
-}
 
 const CounterControls: React.FC = (): JSX.Element => {
 	const [open, setOpen] = useState(false);
@@ -70,7 +46,7 @@ const CountDisplay: React.FC = (): JSX.Element => {
 };
 
 const UserComponent: React.FC = (): JSX.Element => {
-	const { data, isLoading } = useApi<Example[]>("users");
+	const { data, isLoading } = useUser();
 	return (
 		<div className="max-w-[300px] m-auto py-3">
 			<Spinner visible={isLoading} />

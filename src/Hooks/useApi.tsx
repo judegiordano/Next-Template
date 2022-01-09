@@ -2,7 +2,7 @@ import toast from "react-hot-toast";
 import axios from "axios";
 import useSWR, { useSWRConfig } from "swr";
 
-import { SwrGetItem, SwrSetItem } from "@Store";
+import { GetItem, SetItem } from "@Store";
 
 type UseApi<T> = {
 	data: T
@@ -10,26 +10,24 @@ type UseApi<T> = {
 	error: string
 }
 
-const api = axios.create({
-	baseURL: "/api/example"
-});
+const storageKey = "next-demo.swr";
 
-async function fetcher<T>(url?: string) {
-	const { data } = await api.get(url);
+async function fetcher<T>(url: string, key?: string) {
+	const { data } = await axios.get(`${url}/${key}`);
 	return data as T;
 }
 
-export function useApi<T>(key?: string): UseApi<T> {
+export function useApi<T>(url: string, key?: string): UseApi<T> {
 	const { mutate } = useSWRConfig();
-	const { data, error } = useSWR(key, () => fetcher<T>(key), {
+	const { data, error } = useSWR(key, () => fetcher<T>(url, key), {
 		refreshInterval: 5000,
 		onError: async (e, key) => {
 			toast.error(e.toString());
 			console.log(e);
-			const cache = SwrGetItem<T>(key);
+			const cache = GetItem<T>(`${storageKey}.${key}`);
 			cache && mutate(key, cache, false);
 		},
-		onSuccess: (data: T, key: string) => SwrSetItem<T>(key, data)
+		onSuccess: (data: T, key: string) => SetItem<T>(`${storageKey}.${key}`, data)
 	});
 
 	return {

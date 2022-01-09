@@ -1,10 +1,8 @@
-const storageKey = "next-demo.swr";
-
-export function SwrGetItem<T>(key: string) {
-	const data = localStorage.getItem(`${storageKey}.${key}`);
+export function GetItem<T>(key: string) {
+	const data = localStorage.getItem(key);
 	return JSON.parse(data) as T;
 }
 
-export function SwrSetItem<T>(key: string, data: T) {
-	localStorage.setItem(`${storageKey}.${key}`, JSON.stringify(data));
+export function SetItem<T>(key: string, data: T) {
+	localStorage.setItem(key, JSON.stringify(data));
 }
