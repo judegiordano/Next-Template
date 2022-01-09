@@ -38,6 +38,9 @@
 			"@Utils": [
 				"src/Utils"
 			],
+			"@Types": [
+				"src/Types"
+			],
 			"@Hooks/*": [
 				"src/Hooks/*"
 			],

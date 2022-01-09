@@ -1,31 +1,9 @@
 import { useSWRConfig } from "swr";
+import toast from "react-hot-toast";
 
 import { useUsersStore } from "@Store";
+import { User } from "@Types";
 import { useApi } from "./useApi";
-
-type User = {
-	id: 1,
-	name: string
-	username: string
-	email: string
-	address: {
-		street: string
-		suite: string
-		city: string
-		zipcode: string
-		geo: {
-			lat: string
-			lng: string
-		}
-	},
-	phone: string
-	website: string
-	company: {
-		name: string
-		catchPhrase: string
-		bs: string
-	}
-}
 
 export function useUser() {
 	const { mutate } = useSWRConfig();
@@ -33,6 +11,7 @@ export function useUser() {
 	const { data, isLoading, error } = useApi<User[]>("/api/example", "users", {
 		onError: (error, key) => {
 			console.log(error);
+			toast.error(error.toString());
 			mutate(key, users, false);
 		},
 		onSuccess: (data) => setUsers(data)
