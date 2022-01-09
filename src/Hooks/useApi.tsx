@@ -10,6 +10,13 @@ type UseApi<T> = {
 	error: string
 }
 
+type UseApiConfig<T> = {
+	refreshInterval?: number
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	onError?: (error: any, key: string) => void
+	onSuccess?: (data: T, key: string) => void
+}
+
 const storageKey = "next-demo.swr";
 
 async function fetcher<T>(url: string, key?: string) {
@@ -17,17 +24,19 @@ async function fetcher<T>(url: string, key?: string) {
 	return data as T;
 }
 
-export function useApi<T>(url: string, key?: string): UseApi<T> {
+export function useApi<T>(url: string, key?: string, options?: UseApiConfig<T>): UseApi<T> {
 	const { mutate } = useSWRConfig();
+
 	const { data, error } = useSWR(key, () => fetcher<T>(url, key), {
 		refreshInterval: 5000,
-		onError: async (e, key) => {
-			toast.error(e.toString());
-			console.log(e);
+		onError: async (error, key) => {
+			console.log(error);
+			toast.error(error.toString());
 			const cache = GetItem<T>(`${storageKey}.${key}`);
 			cache && mutate(key, cache, false);
 		},
-		onSuccess: (data: T, key: string) => SetItem<T>(`${storageKey}.${key}`, data)
+		onSuccess: (data: T, key: string) => SetItem<T>(`${storageKey}.${key}`, data),
+		...options
 	});
 
 	return {

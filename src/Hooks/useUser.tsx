@@ -1,6 +1,9 @@
+import { useSWRConfig } from "swr";
+
+import { useUsersStore } from "@Store";
 import { useApi } from "./useApi";
 
-type Example = {
+type User = {
 	id: 1,
 	name: string
 	username: string
@@ -25,7 +28,15 @@ type Example = {
 }
 
 export function useUser() {
-	const { data, isLoading, error } = useApi<Example[]>("/api/example", "users");
+	const { mutate } = useSWRConfig();
+	const { setUsers, users } = useUsersStore();
+	const { data, isLoading, error } = useApi<User[]>("/api/example", "users", {
+		onError: (error, key) => {
+			console.log(error);
+			mutate(key, users, false);
+		},
+		onSuccess: (data) => setUsers(data)
+	});
 	return {
 		data,
 		isLoading,
