@@ -8,7 +8,7 @@
 		],
 		"allowJs": true,
 		"skipLibCheck": true,
-		"strict": false,
+		"strict": true,
 		"forceConsistentCasingInFileNames": true,
 		"noEmit": true,
 		"incremental": true,
@@ -34,6 +34,9 @@
 			],
 			"@Store": [
 				"src/Store"
+			],
+			"@Utils": [
+				"src/Utils"
 			],
 			"@Hooks/*": [
 				"src/Hooks/*"

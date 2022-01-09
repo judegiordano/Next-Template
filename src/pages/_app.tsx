@@ -1,11 +1,12 @@
 import React from "react";
+import Head from "next/head";
 import type { AppProps } from "next/app";
 import { SWRConfig } from "swr";
-import Head from "next/head";
 
 import "../styles/globals.css";
 import { AppLink } from "@Elements";
 import { Notifications } from "@Components/Notifications";
+import { Clock } from "@Components/Clock";
 
 const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
@@ -31,9 +32,12 @@ const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Elem
 					<div className="pt-2.5">
 						<AppLink href="/privacy-policy">Privacy Policy</AppLink> - <AppLink href="/terms-of-use">Terms of Use</AppLink>
 					</div>
+					<div className="text-[10px] pt-2.5">
+						<Clock />
+					</div>
 				</footer>
-				<Notifications />
 			</SWRConfig>
+			<Notifications />
 		</>
 	);
 };

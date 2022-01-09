@@ -79,8 +79,8 @@ const UserComponent: React.FC = (): JSX.Element => {
 					username,
 					email
 				}, i) => (
-					<div className="text-xs text-left" key={i}>
-						{i + 1}. <span className="font-semibold">{username}</span>: {email}
+					<div className="text-xs text-left border-b-2 border-gray-200" key={i}>
+						{i + 1}. <span className="font-bold">{username}</span>: {email}
 					</div>
 				))
 			}
