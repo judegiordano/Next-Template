@@ -5,8 +5,7 @@ import Button from "@mui/material/Button";
 import { AppLink } from "@Elements";
 import { useCounterStore } from "@Store";
 import { Dialog } from "@Components/Dialog";
-import { Spinner } from "@Components/Spinner";
-import { useUser } from "@Hooks/useUser";
+import { useTodos } from "@Hooks/useTodos";
 import { AddIcon, DeleteIcon, RemoveIcon } from "@Icons";
 
 const CounterControls: React.FC = (): JSX.Element => {
@@ -45,18 +44,18 @@ const CountDisplay: React.FC = (): JSX.Element => {
 	);
 };
 
-const UserComponent: React.FC = (): JSX.Element => {
-	const { data, isLoading } = useUser();
+const TodosComponent: React.FC = (): JSX.Element => {
+	const { todos } = useTodos();
 	return (
 		<div className="max-w-[300px] m-auto py-3">
-			<Spinner visible={isLoading} />
+			{/* <Spinner visible={isLoading} /> */}
 			{
-				data && data.map(({
-					username,
-					email
+				todos.map(({
+					id,
+					title
 				}, i) => (
 					<div className="text-xs text-left border-b-2 border-gray-200" key={i}>
-						{i + 1}. <span className="font-bold">{username}</span>: {email}
+						{id}. <span className="font-bold">{title}</span>
 					</div>
 				))
 			}
@@ -72,7 +71,7 @@ export const DeleteMe: React.FC = (): JSX.Element => {
 			</h1>
 			<CountDisplay />
 			<CounterControls />
-			<UserComponent />
+			<TodosComponent />
 		</>
 	);
 };

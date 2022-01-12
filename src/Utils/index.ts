@@ -1,3 +1,7 @@
+import { create } from "apisauce";
+
+export { Cookie } from "./Cookie";
+
 const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
 export const ReadableDate = (dateIso: string) => {
@@ -18,3 +22,7 @@ export const ReadableTime = (dateIso: string) => {
 		timeZone
 	}).format(new Date(dateIso));
 };
+
+export const RestClient = create({
+	baseURL: "http://localhost:3000/api/example"
+});

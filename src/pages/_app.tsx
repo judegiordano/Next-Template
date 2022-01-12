@@ -8,7 +8,7 @@ import { AppLink } from "@Elements";
 import { Notifications } from "@Components/Notifications";
 import { Clock } from "@Components/Clock";
 
-const MyApp: React.FC<AppProps> = ({ Component, pageProps }: AppProps): JSX.Element => {
+const MyApp = ({ Component, pageProps }: AppProps): JSX.Element => {
 	return (
 		<>
 			<SWRConfig value={{ provider: () => new Map() }}>

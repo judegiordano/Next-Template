@@ -1,20 +1,18 @@
 import { useSWRConfig } from "swr";
-import toast from "react-hot-toast";
 
-import { useUsersStore } from "@Store";
+import { useUserStore } from "@Store";
 import { User } from "@Types";
 import { useApi } from "./useApi";
 
 export function useUser() {
 	const { mutate } = useSWRConfig();
-	const { setUsers, users } = useUsersStore();
-	const { data, isLoading, error } = useApi<User[]>("/api/example", "users", {
+	const { setUser, user } = useUserStore();
+	const { data, isLoading, error } = useApi<User>("/api/example/auth", "user", {
 		onError: (error, key) => {
 			console.log(error);
-			toast.error(error.toString());
-			mutate(key, users, false);
+			mutate(key, user, false);
 		},
-		onSuccess: (data) => setUsers(data)
+		onSuccess: (data) => setUser(data)
 	});
 	return {
 		data,
